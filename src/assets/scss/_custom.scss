@@ -128,11 +128,12 @@ app-sidebar.toggle  {
 //page header
 .page-header {
   position: fixed;
-  top: 9px;
-  left: 300px;
+  top:11px;
+  left: 295px;
   color: #fff;
   & > h4{
     margin: 0;
+    font-size: 16px;
   }
   app-sidebar.toggle + .content-area > .content .layout-mode > &{
     left: 120px;

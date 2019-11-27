@@ -33,14 +33,14 @@
                     <kendo-grid-column field="checkbox" [sortable]="false" title="checkbox" filter="numeric" [width]="30"
                         [minResizableWidth]="30" class="text-center" headerClass="text-center" [filterable]="false">
                         <ng-template kendoGridHeaderTemplate let-column let-rowIndex="rowIndex">
-                            <label class="custom-checkbox mb-0">
+                            <label class="custom-checkbox mb-0 wihtout-label">
                                 <input type="checkbox" name="parent_checkbox" #Selectallcheckedvalue (change)="on_Selectall_checkbox_checked(Selectallcheckedvalue.checked)"
                                 id="parent_checkbox_{{rowIndex}}" [checked]=selectall>
                                 <span class="checkbox"></span>
                             </label>
                         </ng-template>
                         <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                            <label class="custom-checkbox mb-0">
+                            <label class="custom-checkbox mb-0 wihtout-label">
                                 <input type="checkbox" name="child_checkbox" class="child_checkbox" #checkedvalue (change)="on_checkbox_checked(checkedvalue.checked,dataItem)" [checked]=selectall
                                 id="child_checkbox_{{rowIndex}}">
                                 <span class="checkbox"></span>

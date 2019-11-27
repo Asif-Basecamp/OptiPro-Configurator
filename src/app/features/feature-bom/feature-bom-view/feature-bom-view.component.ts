@@ -146,8 +146,6 @@ export class FeatureBomViewComponent implements OnInit {
         this.service_call(this.current_page, this.search_string);
 
     }
-    ngAfterViewInit() {
-    }
 
     dataStateChanged(event) {
         event.filter = [];
