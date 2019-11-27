@@ -27,7 +27,7 @@ export class FeatureBomViewComponent implements OnInit {
 
     language = JSON.parse(sessionStorage.getItem('current_lang'));
     page_main_title = this.language.Bom_title;
-    add_route_link = '/feature-bom/add';
+    add_route_link = '/feature-bom/add-edit';
     public commonData = new CommonData();
     table_title = this.page_main_title;
     // generate table default constants
@@ -252,7 +252,7 @@ export class FeatureBomViewComponent implements OnInit {
   }
 
     button_click1(data) {
-        this.router.navigateByUrl('feature/bom/edit/' + data.OPTM_FEATUREID);
+        this.router.navigateByUrl('feature-bom/add-edit/' + data.OPTM_FEATUREID);
     }
 
     button_click2(data) {
@@ -262,7 +262,7 @@ export class FeatureBomViewComponent implements OnInit {
     }
 
     duplicate_record(data){
-        this.router.navigateByUrl('feature/bom/add/' + data.Code.trim());
+        this.router.navigateByUrl('feature-bom/add-edit/' + data.Code.trim());
       }
 
     show_association(row_data){
@@ -350,7 +350,7 @@ export class FeatureBomViewComponent implements OnInit {
                 else if (data[0].IsDeleted == "1") {
                     this.commonservice.show_notification( this.language.DataDeleteSuccesfully  + ' : ' + data[0].FeatureCode, 'error');
                     this.service_call(this.current_page, this.search_string);
-                    this.router.navigateByUrl('feature/bom/view');
+                    this.router.navigateByUrl('feature-bom/view');
                 }
                 else {
                     this.commonservice.show_notification( this.language.DataNotDelete + ' : ' + data[0].FeatureCode, 'error');
@@ -477,7 +477,7 @@ export class FeatureBomViewComponent implements OnInit {
                             this.CheckedData = [];
                             this.selectall = false;
                             this.service_call(this.current_page, this.search_string);
-                            this.router.navigateByUrl('feature/bom/view');
+                            this.router.navigateByUrl('feature-bom/view');
                         }
                         else {
                             this.commonservice.show_notification( this.language.DataNotDelete + ' : ' + data[i].FeatureCode, 'error');
