@@ -28,7 +28,7 @@ export class RuleWbViewComponent implements OnInit {
     public companyName: string = ""; 
     public isColumnFilter: boolean = false;
     public username: string = "";
-    add_route_link = '/routing/add-edit';
+    add_route_link = '/rule-work-bench/add-edit';
     record_per_page_list: any = [10, 25, 50, 100]
     record_per_page: any;
     search_string: any = "";
@@ -259,32 +259,9 @@ export class RuleWbViewComponent implements OnInit {
           }; 
       }
   }
-
-    // action button values 
-    show_button1: boolean = true;
-    show_button2: boolean = true;
-    show_button3: boolean = false;
-    show_button4: boolean = false;
-    feature_model_button : boolean = false;
-
-    button1_title = this.language.edit;
-    button2_title = this.language.delete;
-    button3_title = this.language.associated_BOMs;
-    button4_title = this.language.duplicate_record
-
-    button1_color = "btn-info";
-    button2_color = "btn-danger";
-    button3_color = "btn-secondary";
-    button4_color = "btn-success";
-
-    button1_icon = "fa fa-edit fa-fw";
-    button2_icon = "fa fa-trash-o fa-fw";
-    button3_icon = "fa fa-share-alt fa-fw";
-    button4_icon = "fa fa-copy fa-fw";
-
     button_click1(data) {
 
-        this.router.navigateByUrl('routing/edit/' + data.OPTM_RULEID);
+        this.router.navigateByUrl('rule-work-bench/add-edit/' + data.OPTM_RULEID);
         // button click function in here
     }
     button_click2(data) {
@@ -338,17 +315,17 @@ export class RuleWbViewComponent implements OnInit {
                 if(data[0].IsDeleted == "0" && data[0].Message == "Rule Used"){
                     this.commonservice.show_notification( data[0].RuleCode + this.language.RuleIsUsed, 'error');
                     this.service_call(this.current_page, this.search_string);
-                    this.router.navigateByUrl('routing/view');
+                    this.router.navigateByUrl('rule-work-bench/view');
                 }
                 else if(data[0].IsDeleted == "1"){
                     this.commonservice.show_notification( this.language.DataDeleteSuccesfully, 'success');
                     this.service_call(this.current_page, this.search_string);
-                    this.router.navigateByUrl('routing/view');
+                    this.router.navigateByUrl('rule-work-bench/view');
                 }
                 else{
                     this.commonservice.show_notification( this.language.DataNotDelete + ' : ' + data[0].RuleCode , 'error');
                     this.service_call(this.current_page, this.search_string);
-                    this.router.navigateByUrl('routing/view');
+                    this.router.navigateByUrl('rule-work-bench/view');
                 }
                 this.CheckedData = [];
                 this.selectall = false;
@@ -460,7 +437,7 @@ export class RuleWbViewComponent implements OnInit {
                         this.CheckedData = [];
                         this.selectall = false;
                         this.service_call(this.current_page, this.search_string);
-                        this.router.navigateByUrl('routing/view');
+                        this.router.navigateByUrl('rule-work-bench/view');
                     }
                     else{
                         this.commonservice.show_notification( this.language.DataNotDelete + ' : ' + data[i].RuleCode, 'error');

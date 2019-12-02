@@ -8,20 +8,20 @@ import { SortDescriptor, orderBy } from '@progress/kendo-data-query';
 import { GridDataResult } from '@progress/kendo-angular-grid';
 
 @Component({
-  selector: 'app-feature-model-view',
-  templateUrl: './feature-model-view.component.html',
-  styleUrls: ['./feature-model-view.component.scss']
+    selector: 'app-feature-model-view',
+    templateUrl: './feature-model-view.component.html',
+    styleUrls: ['./feature-model-view.component.scss']
 })
 export class FeatureModelViewComponent implements OnInit {
-
-  serviceData: any;
+    public pageSize = 10;
+    serviceData: any;
     @ViewChild("searchinput", { static: true }) _el: ElementRef;
     common_params = new CommonData();
     public commonData = new CommonData();
 
     public listItems: Array<string> = this.commonData.default_limits;
     public selectedValue: number = 10;
-    public skip:number = 0;
+    public skip: number = 0;
 
     public isColumnFilter: boolean = false;
     table_pages: any;
@@ -32,41 +32,41 @@ export class FeatureModelViewComponent implements OnInit {
     public showLoader: boolean = true;
     public showLookupLoader: boolean = false;
     public columns: ColumnSetting[] = [
-    {
-        field: 'OPTM_FEATURECODE',
-        title: this.language.code,
-        type: 'text',
-        width: '200',
-        attrType: 'link'
-    }, 
-    {
-        field: 'OPTM_DISPLAYNAME',
-        title: this.language.Bom_Displayname,
-        type: 'text',
-        width: '200',
-        attrType: 'text'
-    },
-    {
-        field: 'OPTM_EFFECTIVEDATE',
-        title: this.language.Model_Date,
-        type: 'text',
-        width: '100',
-        attrType: 'text'
-    },
-    {
-        field: 'OPTM_TYPE',
-        title: this.language.Type,
-        type: 'text',
-        width: '100',
-        attrType: 'text'
-    },    
-    {
-        field: 'OPTM_STATUS',
-        title: this.language.Model_Status,
-        type: 'text',
-        width: '200',
-        attrType: 'text'
-    },    
+        {
+            field: 'OPTM_FEATURECODE',
+            title: this.language.code,
+            type: 'text',
+            width: '200',
+            attrType: 'link'
+        },
+        {
+            field: 'OPTM_DISPLAYNAME',
+            title: this.language.Bom_Displayname,
+            type: 'text',
+            width: '200',
+            attrType: 'text'
+        },
+        {
+            field: 'OPTM_EFFECTIVEDATE',
+            title: this.language.Model_Date,
+            type: 'text',
+            width: '100',
+            attrType: 'text'
+        },
+        {
+            field: 'OPTM_TYPE',
+            title: this.language.Type,
+            type: 'text',
+            width: '100',
+            attrType: 'text'
+        },
+        {
+            field: 'OPTM_STATUS',
+            title: this.language.Model_Status,
+            type: 'text',
+            width: '200',
+            attrType: 'text'
+        },
     ];
 
     public table_hidden_elements = [false, true, true, false, false, false, false, false, false];
@@ -83,7 +83,7 @@ export class FeatureModelViewComponent implements OnInit {
     public dataBind: any = "";
     CompanyDBId: string;
 
-    constructor(private fms: FeaturemodelService, private router: Router, private fbs: FeaturebomService, private commonservice:CommonService) { }
+    constructor(private fms: FeaturemodelService, private router: Router, private fbs: FeaturebomService, private commonservice: CommonService) { }
     show_table_footer: boolean = false;
     public lookupfor = '';
     //custom dialoag params
@@ -97,13 +97,13 @@ export class FeatureModelViewComponent implements OnInit {
     public GetItemData: any = [];
     public selectall: boolean = false;
     public isMultiDelete: boolean = false;
-    public showImportButton:boolean = true;
+    public showImportButton: boolean = true;
     public menu_auth_index = '201';
 
-    isMobile:boolean=false;
-    isIpad:boolean=false;
-    isDesktop:boolean=true;
-    isPerfectSCrollBar:boolean = false;
+    isMobile: boolean = false;
+    isIpad: boolean = false;
+    isDesktop: boolean = true;
+    isPerfectSCrollBar: boolean = false;
 
     public allowUnsort = true;
     public sort: SortDescriptor[];
@@ -114,13 +114,13 @@ export class FeatureModelViewComponent implements OnInit {
     }
 
     getPageValue() {
-        if(this.selectedValue == null){
+        if (this.selectedValue == null) {
             this.selectedValue = 10;
-        }  
+        }
         return this.selectedValue;
     }
 
-    dataStateChanged(event){
+    dataStateChanged(event) {
         // console.log(event);
         event.filter = [];
         this.record_per_page = sessionStorage.getItem('defaultRecords');
@@ -132,24 +132,24 @@ export class FeatureModelViewComponent implements OnInit {
         grid_event.selectedRows = [];
     }
     saveFilterState() {
-        sessionStorage.setItem('isFilterEnabled', this.isColumnFilter.toString());       
+        sessionStorage.setItem('isFilterEnabled', this.isColumnFilter.toString());
     }
 
     ngOnInit() {
         this.commonData.checkSession();
         this.CompanyDBId = sessionStorage.getItem('selectedComp');
         this.record_per_page = sessionStorage.getItem('defaultRecords');
-        if(sessionStorage.getItem('defaultRecords')!== undefined && sessionStorage.getItem('defaultRecords')!=""){
-            this.selectedValue =  Number(sessionStorage.getItem('defaultRecords'));
+        if (sessionStorage.getItem('defaultRecords') !== undefined && sessionStorage.getItem('defaultRecords') != "") {
+            this.selectedValue = Number(sessionStorage.getItem('defaultRecords'));
         } else {
             this.selectedValue = Number(this.commonData.default_count);
         }
-        if(sessionStorage.isFilterEnabled == "true" ) {
+        if (sessionStorage.isFilterEnabled == "true") {
             this.isColumnFilter = true;
         } else {
             this.isColumnFilter = false;
         }
-        
+
         // check screen authorisation - start
         this.commonservice.getMenuRecord().subscribe(
             menu_item => {
@@ -167,26 +167,26 @@ export class FeatureModelViewComponent implements OnInit {
                 }
             },
             error => {
-              if(error.error.ExceptionMessage.trim() == this.commonData.unauthorizedMessage){
-                this.commonservice.isUnauthorized();
-              }
-              return;
+                if (error.error.ExceptionMessage.trim() == this.commonData.unauthorizedMessage) {
+                    this.commonservice.isUnauthorized();
+                }
+                return;
             });
         // check screen authorisation - end
 
         this.service_call(this.current_page, this.search_string);
         this.showLoader = true;
     }
-    
-    public clearChildCheckbox(){
-      let child_checkbox_selector = document.getElementsByClassName("child_checkbox") as HTMLCollectionOf<HTMLInputElement>;
-      if(child_checkbox_selector.length > 0){
-        for(let i = 0; i < child_checkbox_selector.length; i++){
-          child_checkbox_selector[i].checked = false;
+
+    public clearChildCheckbox() {
+        let child_checkbox_selector = document.getElementsByClassName("child_checkbox") as HTMLCollectionOf<HTMLInputElement>;
+        if (child_checkbox_selector.length > 0) {
+            for (let i = 0; i < child_checkbox_selector.length; i++) {
+                child_checkbox_selector[i].checked = false;
+            }
         }
-      }
     }
-    getcurrentPageSize(grid_value){
+    getcurrentPageSize(grid_value) {
         sessionStorage.setItem('defaultRecords', grid_value);
         this.skip = 0;
         this.selectedValue = grid_value;
@@ -206,8 +206,8 @@ export class FeatureModelViewComponent implements OnInit {
     }
 
     service_call(page_number, search) {
-        if(this.record_per_page!== undefined && sessionStorage.getItem('defaultRecords')){
-            if(this.record_per_page !== sessionStorage.getItem('defaultRecords')){
+        if (this.record_per_page !== undefined && sessionStorage.getItem('defaultRecords')) {
+            if (this.record_per_page !== sessionStorage.getItem('defaultRecords')) {
                 sessionStorage.setItem('defaultRecords', this.record_per_page);
             }
         } else {
@@ -218,15 +218,15 @@ export class FeatureModelViewComponent implements OnInit {
             data => {
 
                 console.log(data);
-                
+
                 this.showLoader = false;
-                if(data != undefined && data != null){
-                    if(data.length > 0){
+                if (data != undefined && data != null) {
+                    if (data.length > 0) {
                         if (data[0].ErrorMsg == "7001") {
                             this.commonservice.RemoveLoggedInUser().subscribe();
                             this.commonservice.signOut(this.router, 'Sessionout');
                             return;
-                        } 
+                        }
                     }
                 }
 
@@ -234,9 +234,9 @@ export class FeatureModelViewComponent implements OnInit {
                 this.CheckedData = [];
                 this.selectall = false
 
-            },error => {
+            }, error => {
                 this.showLookupLoader = false;
-                if(error.error.ExceptionMessage.trim() == this.commonData.unauthorizedMessage){
+                if (error.error.ExceptionMessage.trim() == this.commonData.unauthorizedMessage) {
                     this.commonservice.isUnauthorized();
                 }
                 return;
@@ -249,45 +249,35 @@ export class FeatureModelViewComponent implements OnInit {
     }
 
     private loadServerData(dataset): void {
-      if(this.sort !== undefined && this.sort !== null){
-          this.gridView = {
-              data: orderBy(dataset, this.sort),
-              total: this.dataArray.length
-          };
-      } else {
-          this.gridView = {
-              data: dataset,
-              total: this.dataArray.length
-          }; 
-      }
-  }
-
-    // action button values 
-    show_button1: boolean = true;
-    show_button2: boolean = true;
-    show_button3: boolean = false;
-    show_button4: boolean = true;
-    feature_model_button : boolean = true;
-
+        if (this.sort !== undefined && this.sort !== null) {
+            this.gridView = {
+                data: orderBy(dataset, this.sort),
+                total: this.dataArray.length
+            };
+        } else {
+            this.gridView = {
+                data: dataset,
+                total: this.dataArray.length
+            };
+        }
+    }
 
     button_click1(data) {
-        //alert(id)
         this.router.navigateByUrl('feature/add-edit/' + data.OPTM_FEATUREID);
     }
 
-    duplicate_record(data){
+    duplicate_record(data) {
         this.router.navigateByUrl('feature/add-edit/' + data.OPTM_FEATUREID);
-      }
+    }
 
     button_click2(data) {
         this.dialog_params.push({ 'dialog_type': 'delete_confirmation', 'message': this.language.DeleteConfimation });
         this.show_dialog = true;
         this.row_id = data.OPTM_FEATUREID;
-        //var result = confirm(this.language.DeleteConfimation);
     }
 
-    show_association(row_data){
-        console.log("data " , row_data);
+    show_association(row_data) {
+        console.log("data ", row_data);
         this.showLookupLoader = true;
         this.fbs.ViewAssosciatedBOM(row_data.OPTM_FEATUREID).subscribe(
             data => {
@@ -320,9 +310,9 @@ export class FeatureModelViewComponent implements OnInit {
                 this.commonservice.show_notification(this.language.server_error, 'error');
                 this.showLookupLoader = false;
                 return;
-              }
-            )
-        
+            }
+        )
+
     }
 
     //This will take confimation box value
@@ -351,39 +341,39 @@ export class FeatureModelViewComponent implements OnInit {
                 this.CheckedData = [];
                 this.selectall = false
                 this.isMultiDelete = false;
-                if(data != undefined && data.length > 0){
+                if (data != undefined && data.length > 0) {
                     if (data[0].ErrorMsg == "7001") {
                         this.commonservice.RemoveLoggedInUser().subscribe();
                         this.commonservice.signOut(this.router, 'Sessionout');
                         return;
-                    } 
+                    }
                 }
 
-                if(data[0].IsDeleted == "0" && data[0].Message == "ReferenceExists"){
+                if (data[0].IsDeleted == "0" && data[0].Message == "ReferenceExists") {
                     this.commonservice.show_notification(this.language.Refrence + ' at: ' + data[0].FeatureCode, 'error');
                     this.CheckedData = [];
                     this.selectall = false
                 }
-                else if(data[0].IsDeleted == "1"){
-                    this.commonservice.show_notification( this.language.DataDeleteSuccesfully  + ' with Id : ' + data[0].FeatureCode, 'error');
+                else if (data[0].IsDeleted == "1") {
+                    this.commonservice.show_notification(this.language.DataDeleteSuccesfully + ' with Id : ' + data[0].FeatureCode, 'error');
                     this.service_call(this.current_page, this.search_string);
                     this.router.navigateByUrl('feature/view');
                 }
-                else{
-                    this.commonservice.show_notification( this.language.DataNotDelete + ' : ' + data[0].FeatureCode, 'error');
+                else {
+                    this.commonservice.show_notification(this.language.DataNotDelete + ' : ' + data[0].FeatureCode, 'error');
                 }
 
                 this.CheckedData = [];
                 this.selectall = false;
                 this.clearChildCheckbox();
-            },error => {
+            }, error => {
                 this.showLookupLoader = false;
-                if(error.error.ExceptionMessage.trim() == this.commonData.unauthorizedMessage){
-                  this.commonservice.isUnauthorized();
+                if (error.error.ExceptionMessage.trim() == this.commonData.unauthorizedMessage) {
+                    this.commonservice.isUnauthorized();
                 }
                 return;
-              }
-            )
+            }
+        )
     }
 
     // for testing purpose 
@@ -391,7 +381,7 @@ export class FeatureModelViewComponent implements OnInit {
         let dd: any = {
             total_records: "50",
             data: [
-            ["1", "Demo", "Desc", "2011/04/25"]
+                ["1", "Demo", "Desc", "2011/04/25"]
             ]
 
         };
@@ -467,11 +457,11 @@ export class FeatureModelViewComponent implements OnInit {
             this.show_dialog = true;
         }
         else {
-            this.commonservice.show_notification( this.language.Norowselected, 'error');
+            this.commonservice.show_notification(this.language.Norowselected, 'error');
         }
     }
 
-    delete_multi_row() { 
+    delete_multi_row() {
         this.showLoader = true
         this.fms.DeleteData(this.CheckedData).subscribe(
             data => {
@@ -479,39 +469,39 @@ export class FeatureModelViewComponent implements OnInit {
                 this.CheckedData = [];
                 this.selectall = false
                 this.isMultiDelete = false;
-                if(data != undefined && data.length > 0){
+                if (data != undefined && data.length > 0) {
                     if (data[0].ErrorMsg == "7001") {
                         this.commonservice.RemoveLoggedInUser().subscribe();
                         this.commonservice.signOut(this.router, 'Sessionout');
                         return;
-                    } 
+                    }
                 }
 
-                for(var i=0;  i < data.length ; i++){
-                    if(data[i].IsDeleted == "0" && data[i].Message == "ReferenceExists"){
-                        this.commonservice.show_notification( this.language.Refrence + ' at: ' + data[i].FeatureCode, 'error');
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].IsDeleted == "0" && data[i].Message == "ReferenceExists") {
+                        this.commonservice.show_notification(this.language.Refrence + ' at: ' + data[i].FeatureCode, 'error');
                         this.CheckedData = [];
                         this.selectall = false
                     }
-                    else if(data[i].IsDeleted == "1"){
-                        this.commonservice.show_notification( this.language.DataDeleteSuccesfully + ' with Id : ' + data[i].FeatureCode, 'error');
+                    else if (data[i].IsDeleted == "1") {
+                        this.commonservice.show_notification(this.language.DataDeleteSuccesfully + ' with Id : ' + data[i].FeatureCode, 'error');
                         this.CheckedData = [];
                         this.selectall = false
                         this.service_call(this.current_page, this.search_string);
                         this.router.navigateByUrl('feature/view');
                     }
-                    else{
-                        this.commonservice.show_notification( this.language.DataNotDelete + ' : ' + data[i].FeatureCode, 'error');
+                    else {
+                        this.commonservice.show_notification(this.language.DataNotDelete + ' : ' + data[i].FeatureCode, 'error');
                     }
                 }
 
                 this.CheckedData = [];
                 this.selectall = false;
                 this.clearChildCheckbox();
-            },error => {
+            }, error => {
                 this.showLookupLoader = false;
-                if(error.error.ExceptionMessage.trim() == this.commonData.unauthorizedMessage){
-                  this.commonservice.isUnauthorized();
+                if (error.error.ExceptionMessage.trim() == this.commonData.unauthorizedMessage) {
+                    this.commonservice.isUnauthorized();
                 }
                 return;
             });
@@ -521,6 +511,9 @@ export class FeatureModelViewComponent implements OnInit {
 
     openImportPopup() {
         this.lookupfor = 'import_popup';
+    }
+    public sliderChange(pageIndex: number): void {
+        this.skip = (pageIndex - 1) * this.pageSize;
     }
 
 }

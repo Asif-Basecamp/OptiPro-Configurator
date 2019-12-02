@@ -143,7 +143,7 @@ export class ModelBomViewComponent implements OnInit {
         if (is_authorised.length == 0) {
           let objcc = this;
           setTimeout(function () {
-            this.commonservice.show_notification( objcc.language.notAuthorisedScreen, 'error');
+            this.commonservice.show_notification(objcc.language.notAuthorisedScreen, 'error');
             objcc.router.navigateByUrl('home');
           }, 200);
         }
@@ -177,10 +177,10 @@ export class ModelBomViewComponent implements OnInit {
     this.current_page = 1;
     this.service_call(this.current_page, this.search_string);
   }
-  public clearChildCheckbox(){
+  public clearChildCheckbox() {
     let child_checkbox_selector = document.getElementsByClassName("child_checkbox") as HTMLCollectionOf<HTMLInputElement>;
-    if(child_checkbox_selector.length > 0){
-      for(let i = 0; i < child_checkbox_selector.length; i++){
+    if (child_checkbox_selector.length > 0) {
+      for (let i = 0; i < child_checkbox_selector.length; i++) {
         child_checkbox_selector[i].checked = false;
       }
     }
@@ -242,23 +242,14 @@ export class ModelBomViewComponent implements OnInit {
     }
   }
 
-  // action button values 
-  show_button1: boolean = true;
-  show_button2: boolean = true;
-  show_button3: boolean = false;
-  show_button4: boolean = true;
-  feature_model_button: boolean = false;
-
   button_click1(data) {
 
     this.router.navigateByUrl('model-bom/add-edit/' + data.OPTM_MODELID);
-    // button click function in here
   }
   button_click2(data) {
     this.dialog_params.push({ 'dialog_type': 'delete_confirmation', 'message': this.language.DeleteConfimation });
     this.show_dialog = true;
     this.row_id = data.OPTM_MODELID;
-    // var result = confirm(this.language.DeleteConfimation);
   }
 
   duplicate_record(data) {
@@ -304,13 +295,13 @@ export class ModelBomViewComponent implements OnInit {
           }
         }
         if (data[0].IsDeleted == "0" && data[0].Message == "ReferenceExists") {
-          this.commonservice.show_notification( this.language.Refrence + ' at: ' + data[0].ModelCode, 'error');
+          this.commonservice.show_notification(this.language.Refrence + ' at: ' + data[0].ModelCode, 'error');
           this.CheckedData = [];
           this.selectall = false;
           this.clearChildCheckbox();
         }
         else if (data[0].IsDeleted == "1") {
-          this.commonservice.show_notification( this.language.DataDeleteSuccesfully + ' with Model Id : ' + data[0].ModelCode, 'error');
+          this.commonservice.show_notification(this.language.DataDeleteSuccesfully + ' with Model Id : ' + data[0].ModelCode, 'error');
           this.service_call(this.current_page, this.search_string);
           this.router.navigateByUrl('model-bom/view');
           this.CheckedData = [];
@@ -318,7 +309,7 @@ export class ModelBomViewComponent implements OnInit {
           this.clearChildCheckbox();
         }
         else {
-          this.commonservice.show_notification( this.language.DataNotDelete + ' : ' + data[0].ModelCode, 'error');
+          this.commonservice.show_notification(this.language.DataNotDelete + ' : ' + data[0].ModelCode, 'error');
         }
         this.CheckedData = [];
         this.selectall = false;
@@ -402,7 +393,7 @@ export class ModelBomViewComponent implements OnInit {
       this.show_dialog = true;
     }
     else {
-      this.commonservice.show_notification( this.language.Norowselected, 'error');
+      this.commonservice.show_notification(this.language.Norowselected, 'error');
     }
   }
 
@@ -425,7 +416,7 @@ export class ModelBomViewComponent implements OnInit {
 
           for (var i = 0; i < data.length; i++) {
             if (data[i].IsDeleted == "0" && data[i].Message == "ReferenceExists") {
-              this.commonservice.show_notification( this.language.Refrence + ' at: ' + data[i].ModelCode, 'error');
+              this.commonservice.show_notification(this.language.Refrence + ' at: ' + data[i].ModelCode, 'error');
             }
             else if (data[i].IsDeleted == "1") {
               this.commonservice.show_notification(this.language.DataDeleteSuccesfully + ' with Model Id : ' + data[i].ModelCode, 'error');
@@ -434,7 +425,7 @@ export class ModelBomViewComponent implements OnInit {
               this.router.navigateByUrl('model-bom/view');
             }
             else {
-              this.commonservice.show_notification( this.language.DataNotDelete + ' : ' + data[i].ModelCode, 'error');
+              this.commonservice.show_notification(this.language.DataNotDelete + ' : ' + data[i].ModelCode, 'error');
             }
           }
 
@@ -449,7 +440,7 @@ export class ModelBomViewComponent implements OnInit {
           return;
         })
     } else {
-      this.commonservice.show_notification( this.language.Norowselected, 'error');
+      this.commonservice.show_notification(this.language.Norowselected, 'error');
     }
 
   }
