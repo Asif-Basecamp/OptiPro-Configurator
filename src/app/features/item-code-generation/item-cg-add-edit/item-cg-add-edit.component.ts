@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./item-cg-add-edit.component.scss']
 })
 export class ItemCgAddEditComponent implements OnInit {
-
+  public language = JSON.parse(sessionStorage.getItem('current_lang'));
   constructor() { }
 
   ngOnInit() {

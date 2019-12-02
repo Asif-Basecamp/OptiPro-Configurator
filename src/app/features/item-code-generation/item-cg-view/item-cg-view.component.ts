@@ -22,7 +22,7 @@ export class ItemCgViewComponent implements OnInit {
 
   public companyName: string = "";
   public username: string = "";
-  add_route_link = '/item-code-genration/add-edit';
+  add_route_link = '/item-code-generation/add-edit';
   record_per_page_list: any = [10, 25, 50, 100];
 
 
@@ -244,7 +244,7 @@ export class ItemCgViewComponent implements OnInit {
 
   button_click1(data) {
 
-    this.router.navigateByUrl('item-code-genration/add-edit/' + data.Code.trim());
+    this.router.navigateByUrl('item-code-generation/add-edit/' + data.Code.trim());
     // button click function in here
   }
   button_click2(data) {
@@ -261,7 +261,7 @@ export class ItemCgViewComponent implements OnInit {
   }
 
   duplicate_record(data,isDuplicate){
-    this.router.navigateByUrl('item-code-genration/add-wdit/' + data.Code.trim());
+    this.router.navigateByUrl('item-code-generation/add-wdit/' + data.Code.trim());
   }
 
   //This will take confimation box value
