@@ -53,6 +53,7 @@ export class LoginComponent implements OnInit {
 	public appVersion: any;
 	// common_params = new CommonData();
 	record_per_page: any = this.commonData.default_count;
+	current_url: any;
 	constructor(
 		private auth: AuthService,
 		private router: Router,
@@ -88,7 +89,16 @@ export class LoginComponent implements OnInit {
 			}
 
 		}, 2000);
-
+        this.CommonService.get_config(function(response){
+            objj.CommonService.set_language(response, function(){
+                objj.config_data = JSON.parse(sessionStorage.getItem('system_config'));
+                if (objj.config_data != undefined && objj.config_data != "") {
+               		objj.language = JSON.parse(sessionStorage.getItem('current_lang'));
+                	objj.setDefaultLanguage()
+                }
+            })
+        });
+        this.current_url = this.commonData.get_current_url();
 		if (sessionStorage.getItem('isLoggedIn') == 'true') {
 			this.router.navigateByUrl('/home');
 		} 
@@ -145,9 +155,9 @@ export class LoginComponent implements OnInit {
 			this.config_params = JSON.parse(sessionStorage.getItem('system_config'));
 			this.auth.login(this.loginCredentials, this.config_params.service_url).subscribe(
 				data => {
+					console.log(data)
 					if (data != null || data.Table.length > 0) {
 						if (data.Table.length > 0) {
-
 							var access_token = data.AuthenticationDetails[0].token_type + " " + data.AuthenticationDetails[0].access_token;
 
 							sessionStorage.setItem('authToken', access_token);
