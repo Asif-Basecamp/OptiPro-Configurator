@@ -11,8 +11,8 @@ const routes: Routes = [
     pathMatch: 'full'    
   }, 
   { path: 'view', component: ItemCgViewComponent },
-  { path: 'add-edit', component: ItemCgAddEditComponent },
-  { path: 'add-edit/:id', component: ItemCgAddEditComponent },
+  { path: 'add', component: ItemCgAddEditComponent },
+  { path: 'edit/:id', component: ItemCgAddEditComponent },
 ];
 
 @NgModule({

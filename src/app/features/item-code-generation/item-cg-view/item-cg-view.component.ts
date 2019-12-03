@@ -22,7 +22,7 @@ export class ItemCgViewComponent implements OnInit {
 
   public companyName: string = "";
   public username: string = "";
-  add_route_link = '/item-code-generation/add-edit';
+  add_route_link = '/item-code-generation/add';
   record_per_page_list: any = [10, 25, 50, 100];
 
 
@@ -244,7 +244,7 @@ export class ItemCgViewComponent implements OnInit {
 
   button_click1(data) {
 
-    this.router.navigateByUrl('item-code-generation/add-edit/' + data.Code.trim());
+    this.router.navigateByUrl('item-code-generation/edit/' + data.Code.trim());
     // button click function in here
   }
   button_click2(data) {
