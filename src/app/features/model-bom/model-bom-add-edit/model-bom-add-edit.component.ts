@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./model-bom-add-edit.component.scss']
 })
 export class ModelBomAddEditComponent implements OnInit {
-
+  language = JSON.parse(sessionStorage.getItem('current_lang'));
   constructor() { }
 
   ngOnInit() {

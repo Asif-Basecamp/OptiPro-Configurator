@@ -155,7 +155,7 @@ export class LoginComponent implements OnInit {
 			this.config_params = JSON.parse(sessionStorage.getItem('system_config'));
 			this.auth.login(this.loginCredentials, this.config_params.service_url).subscribe(
 				data => {
-					console.log(data)
+					console.log(data);
 					if (data != null || data.Table.length > 0) {
 						if (data.Table.length > 0) {
 							var access_token = data.AuthenticationDetails[0].token_type + " " + data.AuthenticationDetails[0].access_token;

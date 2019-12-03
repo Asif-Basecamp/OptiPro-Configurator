@@ -11,7 +11,8 @@ const routes: Routes = [
     pathMatch: 'full'    
   }, 
   { path: 'view', component: ModelBomViewComponent },
-  { path: 'add-edit', component: ModelBomAddEditComponent }
+  { path: 'add-edit', component: ModelBomAddEditComponent },
+  { path: 'add-edit/:id', component: ModelBomAddEditComponent }
 ];
 
 @NgModule({

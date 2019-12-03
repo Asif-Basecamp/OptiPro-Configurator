@@ -25,7 +25,7 @@ export class ModelBomViewComponent implements OnInit {
 
   public companyName: string = "";
   public username: string = "";
-  add_route_link = '/model-bom/add';
+  add_route_link = '/model-bom/add-edit';
   record_per_page_list: any = [10, 25, 50, 100]
   record_per_page: any;
   search_string: any = "";

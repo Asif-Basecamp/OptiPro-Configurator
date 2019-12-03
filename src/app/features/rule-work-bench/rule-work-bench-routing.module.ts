@@ -11,7 +11,8 @@ const routes: Routes = [
     pathMatch: 'full'    
   }, 
   { path: 'view', component: RuleWbViewComponent },
-  { path: 'add-edit', component: RuleWbAddEditComponent }
+  { path: 'add-edit', component: RuleWbAddEditComponent },
+  { path: 'add-edit/:id', component: RuleWbAddEditComponent }
 ];
 
 @NgModule({

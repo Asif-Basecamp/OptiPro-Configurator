@@ -97,7 +97,7 @@
                             </div>
                         </div>
                         <div class="sticky-bottom-toolbar d-flex align-items-center justify-content-end border-top pt-2" *ngIf="step0_isNextButtonVisible">                            
-                            <button style="display:none;" id="step0_next_click_id" type="button" class="btn btn-sm btn-primary with-icon btn-next" data-next-block="customer_details">
+                            <button [ngStyle]=" {'display': 'none'}" id="step0_next_click_id" type="button" class="btn btn-sm btn-primary with-icon btn-next" data-next-block="customer_details">
                                 <svg viewBox="0 0 24 24" class="icon arrow-icon"><use xlink:href="#rightArrow"></use></svg>{{language.next}}
                             </button>                
                             <button *ngIf="step0_isNextButtonVisible" type="button" class="btn btn-sm btn-primary with-icon" (click)="onStep0NextPress()">
@@ -325,7 +325,7 @@
                             <button type="button" *ngIf="isNextButtonVisible" class="btn btn-sm btn-primary with-icon" (click)="step2_next_click_validation()">
                                 <svg viewBox="0 0 24 24" class="icon arrow-icon"><use xlink:href="#rightArrow"></use></svg> {{language.next}}
                             </button>                
-                            <button type="button" style="display:none" *ngIf="isNextButtonVisible" class="btn btn-sm btn-primary with-icon btn-next step_2_redirect ml-2"
+                            <button type="button" [ngStyle]=" {'display': 'none'}" *ngIf="isNextButtonVisible" class="btn btn-sm btn-primary with-icon btn-next step_2_redirect ml-2"
                             data-next-block="model_bom_config">
                                 <svg viewBox="0 0 24 24" class="icon arrow-icon"><use xlink:href="#rightArrow"></use></svg>{{language.next}}
                             </button>
@@ -423,7 +423,7 @@
                                                                         <div class="image-preivew" *ngIf="feature_model_data.IMAGEPATH!=''">
                                                                             <a href="javascript:;" data-toggle="modal" data-target="#enlarge_image_modal"
                                                                             (click)="enlage_image(feature_model_data.IMAGEPATH)">
-                                                                            <img src="{{feature_model_data.IMAGEPATH}}" style="width:40px" alt="" class="img-thumbnail">
+                                                                            <img src="{{feature_model_data.IMAGEPATH}}" [ngStyle]=" {'width': '40px'}" alt="" class="img-thumbnail">
                                                                             </a>
                                                                         </div>
                                                                     </td>
@@ -451,7 +451,7 @@
                                                                     <div class="image-preivew" *ngIf="header_data.IMAGEPATH!=''">
                                                                     <a href="javascript:;" data-toggle="modal" data-target="#enlarge_image_modal"
                                                                         (click)="enlage_image(header_data.IMAGEPATH)">
-                                                                        <img src="{{header_data.IMAGEPATH}}" style="width:40px" alt="" class="img-thumbnail">
+                                                                        <img src="{{header_data.IMAGEPATH}}" [ngStyle]=" {'width': '40px'}" alt="" class="img-thumbnail">
                                                                     </a>
                                                                     </div>
                                                                 </td>
@@ -467,15 +467,15 @@
                                             <div class="form-group d-flex align-items-center justify-content-between mb-2" *ngIf="feature_accessory_list.length > 0">
                                                 <div class="h5 m-0 text-muted">{{language.accessories}}</div>
                                                 <div class="">
-                                                    <button class="btn btn-sm btn-icon btn-info mr-2" type="button" (click)="accessoriesPanelToggle(true)" title="Expand All">
+                                                    <button class="btn btn-sm btn-icon btn-info mr-2" type="button" (click)="accessoriesPanelToggleAll(true)" title="Expand All">
                                                         <svg viewBox="0 0 1024 1024" class="icon"><use xlink:href="#expandAll"></use></svg>
                                                     </button>
-                                                    <button class="btn btn-sm btn-icon btn-success" type="button" (click)="accessoriesPanelToggle(false)" title="Collapse All">
+                                                    <button class="btn btn-sm btn-icon btn-success" type="button" (click)="accessoriesPanelToggleAll(false)" title="Collapse All">
                                                         <svg viewBox="0 0 1024 1024" class="icon"><use xlink:href="#collapseAll"></use></svg>
                                                     </button>
                                                 </div>
                                             </div>
-                                            <kendo-panelbar *ngIf="feature_accessory_list.length > 0" [selectable]="false" (stateChange)="accessoriesPanelToggle == !accessoriesPanelToggle">
+                                            <kendo-panelbar *ngIf="feature_accessory_list.length > 0" [selectable]="false">
                                                 <kendo-panelbar-item [title]="accessory_header_data.name" *ngFor="let accessory_header_data of feature_accessory_list; let i = index;" [expanded]="accessoriesPanelToggle">
                                                     <ng-template kendoPanelBarContent>
                                                         <table class="parent_table inner-table table table-bordered table-strip table-sm border-0 mb-0">
@@ -488,17 +488,14 @@
                                                             </thead>
                                                             <tbody *ngIf="get_accessory_element(accessory_header_data,selectedAccessoryBOM).length > 0">
                                                                 <tr *ngFor="let accessory_item_data of get_accessory_element(accessory_header_data,selectedAccessoryBOM); let i= index;">
-                                                                    <td class="text-center">
-                                                                    <div class="custom-control custom-checkbox">
-                                                                        <input type="checkbox" id="accessory_checkbox_{{accessory_item_data.unique_key}}_{{accessory_item_data.OPTM_LINENO}}_{{i}}"
-                                                                        #accessory_checkbox name="accessory_checkbox_{{accessory_item_data.unique_key}}_{{accessory_item_data.OPTM_LINENO}}_{{i}}"
-                                                                        (change)="onAccessorySelectionChange(accessory_checkbox.checked,accessory_item_data,accessory_header_data)"
-                                                                        class="custom-control-input custom-control custom-checkbox" [(checked)]="accessory_item_data.checked">
-                                                                        <label class="custom-control-label" for="accessory_checkbox_{{accessory_item_data.unique_key}}_{{accessory_item_data.OPTM_LINENO}}_{{i}}"></label>
-                                                                    </div>
+                                                                    <td class="text-center" [ngStyle]=" {'width': '30px'}">
+                                                                        <label class="custom-checkbox mb-0 wihtout-label">
+                                                                            <input type="checkbox" id="accessory_checkbox_{{accessory_item_data.unique_key}}_{{accessory_item_data.OPTM_LINENO}}_{{i}}" #accessory_checkbox name="accessory_checkbox_{{accessory_item_data.unique_key}}_{{accessory_item_data.OPTM_LINENO}}_{{i}}" (change)="onAccessorySelectionChange(accessory_checkbox.checked,accessory_item_data,accessory_header_data)" [(checked)]="accessory_item_data.checked">
+                                                                            <span class="checkbox"></span>
+                                                                        </label>
                                                                     </td>
                                                                     <td>
-                                                                    <span *ngIf="accessory_item_data['OPTM_TYPE']=='2'">{{accessory_item_data.OPTM_ITEMKEY}}</span>
+                                                                        <span *ngIf="accessory_item_data['OPTM_TYPE']=='2'">{{accessory_item_data.OPTM_ITEMKEY}}</span>
                                                                     </td>
                                                                     <td>{{accessory_item_data.OPTM_DISPLAYNAME}}</td>
                                                                 </tr>
@@ -707,7 +704,7 @@
                                         <svg viewBox="0 0 24 24" class="icon left-arrow arrow-icon"><use xlink:href="#rightArrow"></use></svg>{{language.previous}}
                                     </button>
                     
-                                    <button style="display:none;" id="modelbom_next_click_id" type="button" class="btn btn-sm btn-primary with-icon btn-next mr-2" data-next-block="accept_bom_so">
+                                    <button [ngStyle]=" {'display': 'none'}" id="modelbom_next_click_id" type="button" class="btn btn-sm btn-primary with-icon btn-next mr-2" data-next-block="accept_bom_so">
                                         <svg viewBox="0 0 24 24" class="icon arrow-icon"><use xlink:href="#rightArrow"></use></svg>{{language.next}}
                                     </button>
                     
@@ -813,7 +810,7 @@
                                         <div class="col-md-7 border-left-primary" id="opti_configur-wizard-four-step-right">
                                             <div class="col-md-12 pl-0">
                                                 <button type="button" class=" btn btn-sm btn-danger with-icon mb-2" (click)="delete_multiple_final_modal()"
-                                                style="display:none;"> <svg class="icon" viewBox="0 0 753.23 753.23"><use xlink:href="#bin"></use></svg> {{language.delete}}
+                                                [ngStyle]=" {'display': 'none'}"> <svg class="icon" viewBox="0 0 753.23 753.23"><use xlink:href="#bin"></use></svg> {{language.delete}}
                                                 </button>
                                             </div>
                                             <!-- new table with detail -->

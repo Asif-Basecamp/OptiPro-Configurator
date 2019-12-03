@@ -44,18 +44,18 @@ export class HeaderComponent implements OnInit {
     ngOnInit() {    
         let objj = this;
         this.CommonService.get_config(function(response){
-        objj.CommonService.set_language(response, function(){
-            objj.config_data = JSON.parse(sessionStorage.getItem('system_config'));
-            // objj.commonData.checkSession();
-            if (objj.config_data != undefined && objj.config_data != "") {
-            if (objj.config_data['locale'] != "" && objj.config_data['locale'] != undefined && objj.config_data['locale'] != 0) {
-                // objj.CommonService.set_language(objj.config_data['locale']);
-            }
-            objj.project_name = objj.config_data['app_title'];
-            objj.language = JSON.parse(sessionStorage.getItem('current_lang'));
-            objj.setDefaultLanguage()
-            }
-        })
+            objj.CommonService.set_language(response, function(){
+                objj.config_data = JSON.parse(sessionStorage.getItem('system_config'));
+                // objj.commonData.checkSession();
+                if (objj.config_data != undefined && objj.config_data != "") {
+                if (objj.config_data['locale'] != "" && objj.config_data['locale'] != undefined && objj.config_data['locale'] != 0) {
+                    // objj.CommonService.set_language(objj.config_data['locale']);
+                }
+                objj.project_name = objj.config_data['app_title'];
+                objj.language = JSON.parse(sessionStorage.getItem('current_lang'));
+                objj.setDefaultLanguage()
+                }
+            })
         });
         this.current_url = this.commonData.get_current_url();
         this.user_guide_link = this.current_url + '/assets/user-guide/OptiPro-Configurator.html';        

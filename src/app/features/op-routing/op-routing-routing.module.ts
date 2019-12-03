@@ -11,7 +11,8 @@ const routes: Routes = [
     pathMatch: 'full'    
   }, 
   { path: 'view', component: OpRoutingViewComponent },
-  { path: 'add-edit', component: OpRoutingAddEditComponent }
+  { path: 'add-edit', component: OpRoutingAddEditComponent },
+  { path: 'add-edit/:id', component: OpRoutingAddEditComponent }
 ];
 
 @NgModule({

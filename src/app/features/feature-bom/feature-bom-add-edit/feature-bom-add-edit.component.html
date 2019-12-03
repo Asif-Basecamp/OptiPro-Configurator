@@ -1,1 +1,34 @@
-<p>feature-bom-add-edit works!</p>
+<!-- loader start -->
+<div class="loader-sm" *ngIf="showLoader">
+    <svg viewBox="0 0 218.2 218.8" class="loader2">
+        <use xlink:href="#loader2"></use>
+    </svg>
+</div>
+    <!-- loader end -->
+    
+<!-- loader start for lookup -->
+<div class="loader-sm" *ngIf="showLookupLoader">
+    <svg viewBox="0 0 218.2 218.8" class="loader2">
+        <use xlink:href="#loader2"></use>
+    </svg>
+</div>
+<!-- loader end for lookup -->
+
+<div class="layout-mode" fxFlex fxLayout="column">
+    <div class="page-header">
+        <h4>{{page_main_title}}</h4>
+    </div>
+    <div class="card" fxFlex>
+        <div class="card-body pb-2" fxFlex fxLayout="column">   
+            <div class="main-portion">feature-bom-add-edit works!</div>
+            <div class="sticky-bottom-toolbar d-flex align-items-center justify-content-end border-top pt-2">
+                <!-- <button type="button" routerLink="{{add_route_link}}" class="mr-10 btn btn-sm btn-primary with-icon mr-2">
+                    <svg viewBox="0 0 490 490" class="icon"><use xlink:href="#addPlan"></use></svg> {{language.add}}
+                </button>
+                <button type="button" class="mr-10 btn btn-sm btn-danger with-icon" (click)="delete()">
+                    <svg viewBox="0 0 753.23 753.23" class="icon"><use xlink:href="#bin"></use></svg> {{language.delete}}
+                </button> -->
+            </div>
+        </div>
+    </div>
+</div>
