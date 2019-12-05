@@ -6,7 +6,6 @@ import { FeatureBomViewComponent } from './feature-bom-view/feature-bom-view.com
 import { FeatureBomAddEditComponent } from './feature-bom-add-edit/feature-bom-add-edit.component';
 import { SharedModules } from 'src/app/shared/shared.module';
 
-
 @NgModule({
   declarations: [FeatureBomViewComponent, FeatureBomAddEditComponent],
   imports: [

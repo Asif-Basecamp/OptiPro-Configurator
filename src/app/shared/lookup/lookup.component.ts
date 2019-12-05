@@ -5,6 +5,7 @@ import { CommonService } from 'src/app/core/service/common.service';
 import { Router } from '@angular/router';
 import { GridDataResult } from '@progress/kendo-angular-grid';
 import { SortDescriptor, orderBy } from '@progress/kendo-data-query';
+import { ModelbomService } from 'src/app/core/service/modelbom.service';
 
 @Component({
   selector: 'app-lookup',
@@ -33,6 +34,7 @@ export class LookupComponent implements OnInit {
   public showLoader: boolean = false;
   public LookupDataLoaded: boolean = false;
   public RuleOutputLookupDataLoaded: boolean = false;
+  public show_associate_bom_popup: boolean = false;
   public showruleOutputLoader: boolean = false;
   public lookup_key = "";
   public item_code_columns;
@@ -50,14 +52,27 @@ export class LookupComponent implements OnInit {
   public allowUnsort = true;
   public sort: SortDescriptor[];
   public gridView: GridDataResult;
+  public checked_rules = [];
+  public rule_selection_show: boolean = false;
+  public rule_output_table_head = [];
+  public rule_output_table_head_hidden_elements = [];
+  public rule_output_data_loaded:boolean = false;
+  public rule_output_title: any;
 
-  constructor(private rs: RoutingService, private CommonService: CommonService, private router: Router) { }
+  constructor(
+    private rs: RoutingService,
+    private CommonService: CommonService,
+    private router: Router,
+    private mbom: ModelbomService, 
+
+  ) { }
 
   ngOnInit() {
   }
 
   async ngOnChanges(): Promise<void> {
     this.popup_lookupfor = this.lookupfor;
+    this.show_associate_bom_popup = false;
     this.showLoader = true;
     this.LookupDataLoaded = false;
     this.showruleOutputLoader = true;
@@ -73,6 +88,8 @@ export class LookupComponent implements OnInit {
     this.resource_counter = 0;
     this.dialogOpened = false;
     this.about_info = [];
+    this.rule_selection_show = false;
+    this.rule_output_data_loaded = false;
 
     this.current_popup_row = "";
     //this.test_model();
@@ -82,41 +99,38 @@ export class LookupComponent implements OnInit {
     //   await this.sleep(400);
     // }
 
-    // if (this.popup_lookupfor != "") {
-    //   if (this.popup_lookupfor == "model_template") {
-    //     this.model_template_lookup();
-    //     return;
-    //   }
-    //   if (this.popup_lookupfor == "model_item_generation") {
-    //     this.model_item_generation_lookup();
-    //     return;
-    //   }
+    if (this.popup_lookupfor != "") {
+      if (this.popup_lookupfor == "model_template") {
+        this.model_template_lookup();
+        return;
+      }
 
-    //   if (this.popup_lookupfor == "feature_lookup") {
-    //     this.get_features_lookup();
-    //     return;
-    //   }
+      if (this.popup_lookupfor == "model_item_generation") {
+        this.model_item_generation_lookup();
+        return;
+      }
 
-    //   if (this.popup_lookupfor == "feature_Detail_lookup") {
-    //     this.get_features_lookup();
-    //     return;
-    //   }
+      if (this.popup_lookupfor == "feature_lookup") {
+        this.get_features_lookup();
+        return;
+      }
 
-    //   if (this.popup_lookupfor == "Item_Detail_lookup") {
-    //     this.get_Item_lookup();
-    //     return;
-    //   }
+      if (this.popup_lookupfor == "feature_Detail_lookup") {
+        this.get_features_lookup();
+        return;
+      }
 
-    //   // open poup for import 
-    //   if (this.popup_lookupfor == "import_popup") {
-    //     this.import_popup();
-    //     return;
-    //   }
+      if (this.popup_lookupfor == "Item_Detail_lookup") {
+        this.get_Item_lookup();
+        return;
+      }
 
-    //   if (this.popup_lookupfor == "ModelBom_lookup" || this.popup_lookupfor == "ModelBom_Detail_lookup") {
-    //     this.get_Model_lookup();
-    //     return;
-    //   }
+ 
+
+      if (this.popup_lookupfor == "ModelBom_lookup" || this.popup_lookupfor == "ModelBom_Detail_lookup") {
+        this.get_Model_lookup();
+        return;
+      }
 
     //   if (this.popup_lookupfor == "large_image_view") {
     //     this.showImage();
@@ -126,20 +140,20 @@ export class LookupComponent implements OnInit {
     //     this.get_Price_lookup();
     //     return;
     //   }
-    //   if (this.popup_lookupfor == "rule_section_lookup") {
-    //     this.ruleSelection();
-    //     return;
-    //   }
+      if (this.popup_lookupfor == "rule_section_lookup") {
+        this.ruleSelection();
+        return;
+      }
 
     //   if (this.popup_lookupfor == "tree_view__model_bom_lookup") {
     //     this.showModelBOMTreeView();
     //     return;
     //   }
 
-    //   if (this.popup_lookupfor == "associated_BOM") {
-    //     this.showAssociatedBOMs();
-    //     return;
-    //   }
+      if (this.popup_lookupfor == "associated_BOM") {
+        this.showAssociatedBOMs();
+        return;
+      }
     //   if (this.popup_lookupfor == "feature_Detail_Output_lookup") {
     //     this.get_features_Output_lookup();
     //     return;
@@ -150,15 +164,15 @@ export class LookupComponent implements OnInit {
       return;
     }
 
-    // if (this.popup_lookupfor == "operand_feature_lookup") {
-    //   this.get_operand_lookup();
-    //   return;
-    // }
+    if (this.popup_lookupfor == "operand_feature_lookup") {
+      this.get_operand_lookup();
+      return;
+    }
 
-    // if (this.popup_lookupfor == "operand_model_lookup") {
-    //   this.get_Model_lookup();
-    //   return;
-    // }
+    if (this.popup_lookupfor == "operand_model_lookup") {
+      this.get_Model_lookup();
+      return;
+    }
 
     if (this.popup_lookupfor == "configure_list_lookup") {
       this.configure_list_lookup();
@@ -200,7 +214,7 @@ export class LookupComponent implements OnInit {
     //     this.show_help_popup();
     //   }
 
-    // }
+     }
   }
 
   private loadServerData(dataset): void {
@@ -330,6 +344,396 @@ export class LookupComponent implements OnInit {
         this.dialogOpened = true;
       }
     }
+  }
+
+  showAssociatedBOMs() {
+
+    this.popup_title = this.language.associated_BOM;
+    this.LookupDataLoaded = false;
+    this.showLoader = true;
+
+    console.log(this.serviceData);
+    this.table_head = [
+
+    {
+      field: 'DisplayName',
+      title: this.language.Model_Name,
+      type: 'text',
+      width: '100',
+      attrType: 'text'
+    },
+    {
+      field: 'Description',
+      title: this.language.Model_Desc,
+      type: 'text',
+      width: '100',
+      attrType: 'text'
+    },
+    ];
+    this.table_head_hidden_elements = [true, false, false];
+    this.width_value = ((100 / this.table_head.length) + '%');
+
+    this.showLoader = false;
+    this.LookupDataLoaded = true;
+    if (this.serviceData !== undefined) {
+      if (this.serviceData.length > 0) {
+        // $("#simple_table_modal").modal('show');
+        this.show_associate_bom_popup = true;
+        this.dialogOpened = false;
+      }
+    }
+
+  }
+
+  get_features_lookup() {
+
+
+    this.popup_title = this.language.Bom_FeatureId;
+    this.LookupDataLoaded = false;
+    this.showLoader = true;
+    this.fill_input_id = 'featureNameId';
+    this.lookup_key = 'OPTM_FEATUREID';
+    // this.table_head = [this.language.Id, this.language.code, this.language.Name];
+
+    this.table_head = [
+    {
+      field: 'OPTM_FEATURECODE',
+      title: this.language.code,
+      type: 'text',
+      width: '100',
+      attrType: 'text'
+    },
+    {
+      field: 'OPTM_DISPLAYNAME',
+      title: this.language.Name,
+      type: 'text',
+      width: '100',
+      attrType: 'text'
+    }
+    ];
+
+    if(this.lookupfor == "feature_lookup") {
+      this.table_head.push({
+        field: 'OPTM_ACCESSORY',
+        title: this.language.Model_Accessory,
+        type: 'text',
+        width: '100',
+        attrType: 'text'
+      });
+    }
+
+    if (this.serviceData !== undefined ) {
+      if(this.serviceData[0]!= undefined && this.serviceData[0].Accessory !== undefined){
+        var objj = this;
+        var language = this.language;
+        this.serviceData = this.serviceData.filter(function(obj){
+          if(obj.Accessory == 'N'){
+            obj.Accessory = language.NO;
+          } else if(obj.Accessory == 'Y'){
+            obj.Accessory = language.YES;
+          }
+          return obj;
+        });
+        if(this.lookupfor == "feature_Detail_lookup") {
+          this.table_head.push({
+            field: 'Accessory',
+            title: this.language.Model_Accessory,
+            type: 'text',
+            width: '100',
+            attrType: 'text'
+          });
+        }
+        
+      }
+    }
+
+    this.table_head_hidden_elements = [true, false, false];
+    this.width_value = ((100 / this.table_head.length) + '%');
+
+    this.showLoader = false;
+    this.LookupDataLoaded = true;
+    if (this.serviceData !== undefined) {
+      if (this.serviceData.length > 0) {
+        this.dialogOpened = true;
+        this.loadServerData(this.serviceData);
+      }
+    }
+
+  }
+
+  ruleSelection() {
+    this.popup_title = this.language.rule_selection;
+    this.LookupDataLoaded = false;
+    this.showLoader = true;
+    this.lookup_key = 'code';
+    this.table_head = [this.language.select, this.language.rule, this.language.description];
+    console.log(this.serviceData);
+
+    this.table_head_hidden_elements = [false, false, false];
+    this.width_value = ((100 / this.table_head.length) + '%');
+
+    this.showLoader = false;
+    this.LookupDataLoaded = true;
+    if (this.serviceData !== undefined) {
+      if (this.serviceData.length > 0) {
+        this.checked_rules = [];
+        for (var i = 0; i < this.serviceData.length; i++) {
+          if (this.serviceData[i].Selected == "Y") {
+            this.serviceData[i].Selected = true;
+            this.checked_rules.push(this.serviceData[i]);
+          }
+          else {
+            this.serviceData[i].Selected = false;
+          }
+
+        }
+        this.rule_selection_show = true;
+      }
+    }
+  }
+
+  get_rule_output(rule_id, seq_id) {
+    this.rule_output_title = this.language.rule_output_title;
+    this.showruleOutputLoader = true;
+    this.RuleOutputLookupDataLoaded = false;
+    this.rule_output_table_head = ['#', this.language.feature, this.language.description];
+    this.rule_output_table_head_hidden_elements = [false, false, false];
+    this.rule_output_data_loaded = true;
+     
+    let obj = this;
+    this.mbom.getRuleOutput(rule_id, seq_id).subscribe(
+      data => {
+        console.log(data);
+        if (data !== '' && data !== undefined && data !== null) {
+          obj.outputServiceData = data
+        } else {
+         this.CommonService.show_notification(this.language.incorrectfile, 'error');
+        }
+
+      }, error => {
+        if(error.error.ExceptionMessage.trim() == this.commonData.unauthorizedMessage){
+          this.CommonService.isUnauthorized();
+        }
+      })
+
+    this.showruleOutputLoader = false;
+    this.RuleOutputLookupDataLoaded = true;
+
+  }
+  
+  close_rule_window() {
+    this.rule_output_data_loaded = false; 
+  }
+
+  on_checkbox_checked(checkedvalue, row_data) {
+   
+    if (checkedvalue == true) {
+      row_data.Selected = true;
+      this.checked_rules.push(row_data);
+    }
+    else {
+      let i = this.checked_rules.indexOf(row_data);
+      row_data.Selected = false;
+      this.checked_rules.splice(i, 1)
+    }
+  
+  }
+
+  model_item_generation_lookup() {
+    this.popup_title = this.language.Model_Ref;
+    this.LookupDataLoaded = false;
+    this.showLoader = true;
+    this.fill_input_id = 'featureItemCode';
+    
+    this.table_head = [
+    {
+      field: 'OPTM_CODE',
+      title: this.language.code,
+      type: 'text',
+      width: '100',
+      attrType: 'text'
+    },
+
+    ];
+
+    this.table_head_hidden_elements = [false];
+    this.lookup_key = 'OPTM_CODE';
+    this.width_value = ((100 / this.table_head.length) + '%');
+
+    this.showLoader = false;
+    this.LookupDataLoaded = true;
+    if (this.serviceData !== undefined) {
+      if (this.serviceData.length > 0) {
+        this.dialogOpened = true;
+        this.loadServerData(this.serviceData);
+        // $("#lookup_modal").modal('show');
+      }
+    }
+  }
+
+  model_template_lookup() {
+    this.popup_title = this.language.model_template;
+    this.LookupDataLoaded = false;
+    this.showLoader = true;
+    this.fill_input_id = 'featureItemName';
+    this.table_head = [this.language.code, this.language.Name];
+
+    this.table_head = [
+    {
+      field: 'Code',
+      title: this.language.code,
+      type: 'text',
+      width: '100',
+      attrType: 'text'
+    },
+    {
+      field: 'Name',
+      title: this.language.Name,
+      type: 'text',
+      width: '100',
+      attrType: 'text'
+    },
+
+    ];
+
+
+    this.table_head_hidden_elements = [false, false];
+    this.lookup_key = 'Name';
+
+    this.width_value = ((100 / this.table_head.length) + '%');
+
+
+    this.showLoader = false;
+    this.LookupDataLoaded = true;
+    if (this.serviceData !== undefined) {
+      if (this.serviceData.length > 0) {
+        this.dialogOpened = true;
+        this.loadServerData(this.serviceData);
+      }
+    }
+  }
+
+  get_operand_lookup() {
+
+
+    this.popup_title = this.language.Bom_FeatureId;
+    this.LookupDataLoaded = false;
+    this.showLoader = true;
+    this.fill_input_id = 'featureNameId';
+    this.lookup_key = 'OPTM_FEATUREID';
+    this.table_head = [
+    {
+      field: 'feature_code',
+      title: this.language.code,
+      type: 'text',
+      width: '100',
+      attrType: 'text'
+    },
+    {
+      field: 'OPTM_DISPLAYNAME',
+      title: this.language.Name,
+      type: 'text',
+      width: '100',
+      attrType: 'text'
+    },
+
+    ];
+
+    this.table_head_hidden_elements = [true, false, false];
+    this.width_value = ((100 / this.table_head.length) + '%');
+
+    this.showLoader = false;
+    this.LookupDataLoaded = true;
+    if (this.serviceData !== undefined) {
+      if (this.serviceData.length > 0) {
+        this.dialogOpened = true;
+        this.loadServerData(this.serviceData);
+      }
+    }
+
+  }  
+
+  get_Model_lookup() {
+
+
+    this.popup_title = this.language.ModelBom;
+    this.LookupDataLoaded = false;
+    this.showLoader = true;
+    this.fill_input_id = 'featureNameId';
+    this.lookup_key = 'OPTM_FEATUREID';
+    this.table_head = [
+    {
+      field: 'OPTM_FEATURECODE',
+      title: this.language.code,
+      type: 'text',
+      width: '100',
+      attrType: 'text'
+    },
+    {
+      field: 'OPTM_DISPLAYNAME',
+      title: this.language.Name,
+      type: 'text',
+      width: '100',
+      attrType: 'text'
+    },
+
+    ];
+
+
+    this.table_head_hidden_elements = [true, false, false];
+    this.width_value = ((100 / this.table_head.length) + '%');
+
+    this.showLoader = false;
+    this.LookupDataLoaded = true;
+    if (this.serviceData !== undefined) {
+      if (this.serviceData.length > 0) {
+        this.dialogOpened = true;
+        this.loadServerData(this.serviceData);
+      }
+    }
+
+  }
+
+  get_Item_lookup() {
+
+
+    this.popup_title = this.language.ItemLookupTitle;
+    this.LookupDataLoaded = false;
+    this.showLoader = true;
+    this.fill_input_id = 'type_value';
+    this.lookup_key = 'ItemKey';
+    // this.table_head = [this.language.itemkey, this.language.Name];
+
+    this.table_head = [
+    {
+      field: 'ItemKey',
+      title: this.language.code,
+      type: 'text',
+      width: '100',
+      attrType: 'text'
+    },
+    {
+      field: 'Description',
+      title: this.language.Name,
+      type: 'text',
+      width: '100',
+      attrType: 'text'
+    },
+    ];
+
+    this.table_head_hidden_elements = [false, false];
+    this.width_value = ((100 / this.table_head.length) + '%');
+
+    this.showLoader = false;
+    this.LookupDataLoaded = true;
+    console.log('this.serviceData');
+    console.log(this.serviceData);
+    if (this.serviceData !== undefined) {
+      if (this.serviceData.length > 0) {
+        this.dialogOpened = true;
+        this.loadServerData(this.serviceData);
+      }
+    }
 
   }
 
@@ -421,6 +825,8 @@ export class LookupComponent implements OnInit {
   public close_kendo_dialog() {
     this.dialogOpened = false;
     this.current_popup_row = "";
+    this.show_associate_bom_popup = false;
+    this.rule_selection_show = false;
   }
   public sortChange(sort: SortDescriptor[]): void {
     this.sort = sort;

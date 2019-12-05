@@ -608,7 +608,8 @@
     "miscellaneous_charges":"Miscellaneous Charges",
     "hidden_item_text_on_report":"Hidden Item Text On Report",
     "DataNotUpdated": "Failed to update data",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "rule_output_title":"Rule Output"
 
 
 }
