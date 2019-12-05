@@ -28,9 +28,10 @@ import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
     DropDownsModule
   ],
   exports: [
-    FormsModule, FlexLayoutModule, NotificationModule, ExcelModule, GridModule, CommonModule, CustomLayoutModule, DialogsModule, DatePickerModule, LookupComponent, CustomDialogsComponent,DropDownsModule
+    FormsModule, FlexLayoutModule, NotificationModule, ExcelModule, GridModule, CommonModule, CustomLayoutModule,
+     DialogsModule, DatePickerModule, LookupComponent, CustomDialogsComponent,DropDownsModule
   ],
-  providers: [],
+  providers: [LookupComponent],
   bootstrap: []
 })
 export class SharedModules { }

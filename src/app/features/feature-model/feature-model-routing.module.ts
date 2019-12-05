@@ -11,8 +11,8 @@ const routes: Routes = [
     pathMatch: 'full'    
   }, 
   { path: 'view', component: FeatureModelViewComponent },
-  { path: 'add-edit', component: FeatureModelAddEditComponent },
-  { path: 'add-edit/:id', component: FeatureModelAddEditComponent }
+  { path: 'add', component: FeatureModelAddEditComponent },
+  { path: 'edit/:id', component: FeatureModelAddEditComponent }
 ];
 
 

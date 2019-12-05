@@ -38,10 +38,19 @@
 
         <div class="row">
             <div class="col-sm-12" style="margin-bottom: 0.8rem;">
-              <a *ngIf="showAddRowbtn" href="javascript:;" class="btn btn-outline-primary btn-sm mt-1" title="{{language.add_row}} " (click)="onAddRow(0)"
+
+                <button type="button" *ngIf="showAddRowbtn"  class="mr-10 btn btn-sm btn-primary with-icon mr-2"
+                 title="{{language.add_row}} " (click)="onAddRow(0)" >
+                    <svg viewBox="0 0 490 490" class="icon"><use xlink:href="#addPlan"></use></svg> {{language.add_row}}
+                </button>
+              
+              <!-- <a *ngIf="showAddRowbtn"  class="btn btn-outline-primary btn-sm mt-1" title="{{language.add_row}} " (click)="onAddRow(0)"
                 #button>
+                <svg viewBox="0 0 490 490" class="icon"><use xlink:href="#addPlan" ></use></svg>
                 <i class="fa fa-plus"></i> {{language.add_row}}
-              </a>
+                
+              </a> -->
+            
             </div>
           </div>
 

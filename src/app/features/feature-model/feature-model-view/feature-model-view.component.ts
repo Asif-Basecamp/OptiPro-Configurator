@@ -71,7 +71,7 @@ export class FeatureModelViewComponent implements OnInit {
 
     public table_hidden_elements = [false, true, true, false, false, false, false, false, false];
     record_per_page_list: any = this.common_params.default_limits;
-    add_route_link = '/feature/add-edit';
+    add_route_link = '/feature/add';
     page_main_title = this.language.model_feature_master;
     table_title = this.page_main_title;
 
@@ -263,7 +263,7 @@ export class FeatureModelViewComponent implements OnInit {
     }
 
     button_click1(data) {
-        this.router.navigateByUrl('feature/add-edit/' + data.OPTM_FEATUREID);
+        this.router.navigateByUrl('feature/edit/' + data.OPTM_FEATUREID);
     }
 
     duplicate_record(data) {
