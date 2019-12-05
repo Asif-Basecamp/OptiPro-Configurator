@@ -10,11 +10,17 @@ import { DatePickerModule } from '@progress/kendo-angular-dateinputs';
 import { LookupComponent } from './lookup/lookup.component';
 import { CustomDialogsComponent } from './custom-dialogs/custom-dialogs.component';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
+import { TreeViewComponent } from './TreeView/tree.view';
+import { TooltipModule } from '@progress/kendo-angular-tooltip';
+import { ToFixedPipe } from 'src/app/core/pipe/to-fixed.pipe';
 
 @NgModule({
   declarations: [
   LookupComponent,
-  CustomDialogsComponent],
+  TreeViewComponent,
+  CustomDialogsComponent,
+  ToFixedPipe
+],
   imports: [
     FormsModule,
     FlexLayoutModule,
@@ -25,10 +31,13 @@ import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
     CustomLayoutModule,
     NotificationModule,
     DatePickerModule,
-    DropDownsModule
+    DropDownsModule,
+    TooltipModule
   ],
   exports: [
-    FormsModule, FlexLayoutModule, NotificationModule, ExcelModule, GridModule, CommonModule, CustomLayoutModule, DialogsModule, DatePickerModule, LookupComponent, CustomDialogsComponent,DropDownsModule
+    FormsModule, FlexLayoutModule, NotificationModule, ExcelModule, GridModule, CommonModule, CustomLayoutModule, DialogsModule, DatePickerModule, LookupComponent, CustomDialogsComponent,DropDownsModule,
+    TooltipModule,
+    TreeViewComponent
   ],
   providers: [],
   bootstrap: []
