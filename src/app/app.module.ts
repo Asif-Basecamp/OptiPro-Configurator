@@ -12,6 +12,8 @@ import { HomeComponent } from './features/home.component';
 import { SharedModules } from './shared/shared.module';
 import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 import { TooltipModule } from '@progress/kendo-angular-tooltip';
+import { InputsModule } from '@progress/kendo-angular-inputs';
+
 
 
 
@@ -30,7 +32,8 @@ import { TooltipModule } from '@progress/kendo-angular-tooltip';
     HttpClientModule,
     SharedModules,
     DateInputsModule,
-    TooltipModule
+    TooltipModule,
+    InputsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

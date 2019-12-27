@@ -40,9 +40,8 @@
                                     [(ngModel)]="step1_data.selected_configuration_key" #selected_configuration_key
                                     readonly>
                                 <div class="input-group-append">
-                                    <span class="input-group-text cursor_icon" id="basic-addon2"
-                                        (click)="open_config_lookup()">
-                                        <i class="fa fa-bars"></i>
+                                    <span class="btn btn-sm btn-primary cursor-pointer btn-icon" (click)="open_config_lookup()">
+                                        <svg class="icon m-0" viewBox="0 -96 512 512"><use xlink:href="#menu"></use></svg>
                                     </span>
                                 </div>
                             </div>
@@ -156,8 +155,8 @@
                             <div class="col-sm-7 input-group">
                                 <input type="text" ngValue="" class="form-control form-control-sm" (change)="onCustomerChange('')" name="customer" id="customer" placeholder="{{language.customer}}" [(ngModel)]="step1_data.customer" #customer>
                                 <div class="input-group-append">
-                                    <span class="input-group-text cursor_icon" id="basic-addon2" (click)="openCustomerLookUp()">
-                                        <i class="fa fa-bars"></i>
+                                    <span class="btn btn-sm btn-primary cursor-pointer btn-icon" (click)="openCustomerLookUp()">
+                                        <svg class="icon m-0" viewBox="0 -96 512 512"><use xlink:href="#menu"></use></svg>
                                     </span>
                                 </div>
                             </div>
@@ -272,9 +271,7 @@
     <!-- Customer and Document Details end -->
 
     <div class="f1-buttons py-2 border-top" *ngIf="isNextButtonVisible">
-        <span class="output_final_screen_save_button">
-            <button (click)="onSavePress()" *ngIf="isNextButtonVisible" type="button" class="btn btn-sm btn-success">{{language.save}}</button>
-        </span>
+        <button (click)="onSavePress()" *ngIf="isNextButtonVisible" type="button" class="btn btn-sm btn-success with-icon mr-2 "><svg viewBox="0 0 512 512" class="icon"><use xlink:href="#saveDisk"></use></svg> {{language.save}}</button>
         <button type="button" class="btn btn-sm btn-dark  mr-10 btn-previous" (click)="previousButtonPress()" data-previous-block="choose_operation">{{language.previous}}</button>
         <button type="button" *ngIf="isNextButtonVisible" class="btn btn-sm btn-primary  mr-10 btn-sm" (click)="step2_next_click_validation()">{{language.next}}</button>
         <button type="button" style="display:none" *ngIf="isNextButtonVisible" class="btn btn-sm btn-primary  mr-10 btn-next btn-sm step_2_redirect" data-next-block="model_bom_config"> {{language.next}}</button>

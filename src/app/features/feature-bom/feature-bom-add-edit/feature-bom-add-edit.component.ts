@@ -1782,10 +1782,8 @@ export class FeatureBomAddEditComponent implements OnInit {
     let element = document.getElementById('right-tree-section');
     if (element.classList.contains('d-block')) {
       this.hidetree();
-      console.log("hide");
     } else {
       this.showtree();
-      console.log("show");
     }
   }
 
@@ -1814,23 +1812,35 @@ export class FeatureBomAddEditComponent implements OnInit {
 
   childExpand(id: any) {
     id.classList.toggle("expanded")
-    if (id.parentNode.parentNode.childNodes[4].style.display === "none") {
-      id.parentNode.parentNode.childNodes[4].style.display = "block";
+    if (id.parentNode.parentNode.childNodes[4].classList.contains("d-none")) {
+      id.parentNode.parentNode.childNodes[4].classList.remove("d-none");
+      id.parentNode.parentNode.childNodes[4].classList.add("d-block");
     } else {
-      id.parentNode.parentNode.childNodes[4].style.display = "none";
+      id.parentNode.parentNode.childNodes[4].classList.remove("d-block");
+      id.parentNode.parentNode.childNodes[4].classList.add("d-none");      
     }
   }
   expandAll() {
-    console.log("expandAll")
-    document.getElementById('treeview').classList.remove("d-none");
-    document.getElementById('treeview').classList.add("d-block");
-    document.getElementById('expand-btn').classList.add("expanded");
+    var tree = document.getElementsByTagName('treeview');
+    var exBtn = document.getElementsByClassName('expand-btn');
+    for(var i=0; i < exBtn.length; i++){
+      exBtn[i].classList.add("expanded");
+    }
+    for(var h=0; h < exBtn.length; h++){
+      tree[h].classList.remove("d-none");
+      tree[h].classList.add("d-block");
+    }
   }
   collapseAll() {
-    console.log("collapseAll")
-    document.getElementById('treeview').classList.remove("d-block");
-    document.getElementById('treeview').classList.add("d-none");    
-    document.getElementById('expand-btn').classList.remove("expanded");
+    var tree = document.getElementsByTagName('treeview');  
+    var exBtn = document.getElementsByClassName('expand-btn');    
+    for(var i=0; i < exBtn.length; i++){
+      exBtn[i].classList.remove("expanded");
+    }
+    for(var h=0; h < exBtn.length; h++){      
+      tree[h].classList.remove("d-block");
+      tree[h].classList.add("d-none");
+    }
   }
 
   resequence_operation(type) {  // type = 1 : up & type = 2 : down

@@ -93,9 +93,9 @@ export class ModelBomAddEditComponent implements OnInit {
 
   navigateToFeatureOrModelBom(type_value, type ) {
     if(type == '1'){
-      this.route.navigateByUrl("feature/bom/add-edit/"+type_value);
+      this.route.navigateByUrl("feature-bom/add-edit/"+type_value);
     } else if(type == '3'){
-      this.route.navigateByUrl("modelbom/add-edit/"+type_value);
+      this.route.navigateByUrl("model-bom/add-edit/"+type_value);
       this.modelbom_data= [];
       this.tree_data_json = [];
       this.get_modelbom_details(type_value, true);
@@ -349,7 +349,7 @@ ngAfterViewInit() {
     this._el.nativeElement.focus();
   }
   else {
-    this._ele.nativeElement.focus();
+    //this._ele.nativeElement.focus();
   }
 }
 
@@ -1961,25 +1961,35 @@ onExplodeClick(type) {
   
   childExpand(id: any) {
     id.classList.toggle("expanded")
-    if (id.parentNode.parentNode.childNodes[4].style.display === "none") {
-      id.parentNode.parentNode.childNodes[4].style.display = "block";
+    if (id.parentNode.parentNode.childNodes[4].classList.contains("d-none")) {
+      id.parentNode.parentNode.childNodes[4].classList.remove("d-none");
+      id.parentNode.parentNode.childNodes[4].classList.add("d-block");
     } else {
-      id.parentNode.parentNode.childNodes[4].style.display = "none";
+      id.parentNode.parentNode.childNodes[4].classList.remove("d-block");
+      id.parentNode.parentNode.childNodes[4].classList.add("d-none");
     }
   }
-
   expandAll() {
-    console.log("expandAll")
-    document.getElementById('treeview').classList.remove("d-none");
-    document.getElementById('treeview').classList.add("d-block");
-    document.getElementById('expand-btn').classList.add("expanded");
+    var tree = document.getElementsByTagName('treeview');
+    var exBtn = document.getElementsByClassName('expand-btn');
+    for(var i=0; i < exBtn.length; i++){
+      exBtn[i].classList.add("expanded");
+    }
+    for(var h=0; h < exBtn.length; h++){
+      tree[h].classList.remove("d-none");
+      tree[h].classList.add("d-block");
+    }
   }
-
   collapseAll() {
-    console.log("collapseAll")
-    document.getElementById('treeview').classList.remove("d-block");
-    document.getElementById('treeview').classList.add("d-none");    
-    document.getElementById('expand-btn').classList.remove("expanded");
+    var tree = document.getElementsByTagName('treeview');  
+    var exBtn = document.getElementsByClassName('expand-btn');    
+    for(var i=0; i < exBtn.length; i++){
+      exBtn[i].classList.remove("expanded");
+    }
+    for(var h=0; h < exBtn.length; h++){      
+      tree[h].classList.remove("d-block");
+      tree[h].classList.add("d-none");
+    }
   }
 
   resequence_operation(type) {  // type = 1 : up & type = 2 : down

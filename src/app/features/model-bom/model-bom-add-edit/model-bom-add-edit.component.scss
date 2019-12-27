@@ -35,3 +35,12 @@
     max-height: calc(100vh - 145px);
     height: calc(100vh - 145px) !important;
 }
+.tree-wrapper {
+    min-height: 100%;
+    max-height: 100% !important;
+}
+.parent_ul{
+    height: calc(100vh - 195px);
+    overflow: auto;
+    margin: 0;
+}

@@ -538,7 +538,10 @@ export class LookupComponent implements OnInit {
     }
   
   }
-
+  rule_select_ok() {
+    this.lookupvalue.emit(this.checked_rules);
+    this.close_kendo_dialog();
+  }
   model_item_generation_lookup() {
     this.popup_title = this.language.Model_Ref;
     this.LookupDataLoaded = false;

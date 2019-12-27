@@ -8,18 +8,15 @@ import { CwMbomConfigureProductComponent } from './cw-mbom-configure-product/cw-
 import { CwVerifyAcceptFinalComponent } from './cw-verify-accept-final/cw-verify-accept-final.component';
 import { CwViewOldComponent } from './cw-view-old/cw-view.component';
 import { SharedModules } from 'src/app/shared/shared.module';
-import { ToFixedPipe } from 'src/app/core/pipe/to-fixed.pipe';
 import { LayoutModule } from '@progress/kendo-angular-layout';
-import { PanelBarModule } from '@progress/kendo-angular-layout';
 
 
 @NgModule({
-  declarations: [CwViewComponent, CwOperationCustomerComponent, CwMbomConfigureProductComponent, CwVerifyAcceptFinalComponent, CwViewOldComponent, ToFixedPipe],
+  declarations: [CwViewComponent, CwOperationCustomerComponent, CwMbomConfigureProductComponent, CwVerifyAcceptFinalComponent, CwViewOldComponent],
   imports: [
     CommonModule,
     ConfigurationWizardRoutingModule,
     LayoutModule,
-    PanelBarModule,
     SharedModules    
   ],
   // entryComponents: [CwViewComponent]

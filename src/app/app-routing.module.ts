@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { ExtraOptions, Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './features/home.component';
+import { PreferencesComponent } from './features/preferences/preferences.component';
 
 const routes: Routes = [
   {
@@ -16,7 +17,11 @@ const routes: Routes = [
   { path: 'home',
     component: HomeComponent,
     data: { showHeader: true, showSidebar: true, showFooter:false, compactLayout:false }
-  },  
+  }, 
+  { path: 'preferences',
+    component: PreferencesComponent,
+    data: { showHeader: true, showSidebar: true, showFooter:false, compactLayout:false }
+  },   
   {
     path: 'item-code-generation',
     loadChildren: () => import('./features/item-code-generation/item-code-generation.module').then(m => m.ItemCodeGenerationModule),    

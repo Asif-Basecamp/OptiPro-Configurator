@@ -433,11 +433,11 @@
                                                                 <tr>
                                                                 <td>
                                                                     <div class="{{header_data.element_class}}">
-                                                                    <input type="{{header_data.element_type}}" id="checkbox_{{header_data.OPTM_FEATUREID}}_{{header_data.OPTM_LINENO}}_{{header_data.OPTM_MODELID}}"
-                                                                        name="checkbox_{{header_data.OPTM_FEATUREID}}" #selectionchecked class="custom-control-input"
-                                                                        (change)="onselectionchange(header_data,selectionchecked,selectionchecked.id)"
-                                                                        [(checked)]="FeatureBOMDataForSecondLevel.checked" [disabled]="FeatureBOMDataForSecondLevel.disable">
-                                                                    <label class="custom-control-label" for="checkbox_{{header_data.OPTM_FEATUREID}}_{{header_data.OPTM_LINENO}}_{{header_data.OPTM_MODELID}}">
+                                                                    <label class="custom-{{header_data.element_type}} mb-0 wihtout-label" for="checkbox_{{header_data.OPTM_FEATUREID}}_{{header_data.OPTM_LINENO}}_{{header_data.OPTM_MODELID}}">
+                                                                        <input type="{{header_data.element_type}}" id="checkbox_{{header_data.OPTM_FEATUREID}}_{{header_data.OPTM_LINENO}}_{{header_data.OPTM_MODELID}}" (change)="onselectionchange(header_data,selectionchecked,selectionchecked.id)"
+                                                                        [(checked)]="FeatureBOMDataForSecondLevel.checked" [disabled]="FeatureBOMDataForSecondLevel.disable"
+                                                                        name="checkbox_{{header_data.OPTM_FEATUREID}}" #selectionchecked>
+                                                                        <span class="checkbox"></span>
                                                                     </label>
                                                                     </div>
                                                                 </td>
@@ -594,7 +594,7 @@
                                                             <!-- {{featurerow.is_accessory}} -->
                                                             <span *ngIf="featurerow.is_accessory  == 'N'">
                                                                 {{this.language.NO}}
-                                                                <!--  <b class="text-danger"><i class="fa fa-time fa-fw"></i></b> -->
+                                                                <!--  <b class="text-danger"><svg viewBox="0 0 489 489" class="icon"><use xlink:href="#cancel"></use></svg></b> -->
                                                             </span>
                                                             <span *ngIf="featurerow.is_accessory  == 'Y'">
                                                                 <!-- <b class="text-success"><i class="fa fa-check fa-fw"></i></b> -->
@@ -672,9 +672,9 @@
                                             <option *ngFor="let model_data of this.step3_data_final" [value]="model_data.rowIndex" [selected]="step2_selected_model_id == model_data.rowIndex">{{model_data.item}}</option>
                                         </select>                       
                                         <button type="button" class="btn btn-sm btn-info with-icon add-update-btn add-btn multiple_model_click_btn mr-2" (click)="add_fg_multiple_model('')" [disabled]="multiple_model_disabled_status" *ngIf="step2_data.model_code != '' && step2_data.model_code != undefined && step2_selected_model_id == -1">
-                                            <svg viewBox="0 0 512 512" class="icon"><use xlink:href="#add"></use></svg>{{language.add_model}}
+                                            <svg viewBox="0 0 8500 8500" class="icon"><use xlink:href="#add"></use></svg>{{language.add_model}}
                                         </button>
-                                        <button type="button" [disabled]="multiple_model_disabled_status" class="btn with-icon btn-sm btn-info mr-2 add-update-btn update-btn multiple_model_click_btn" (click)="update_added_model()" *ngIf="step2_data.model_code != '' && step2_data.model_code != undefined &&  step2_selected_model_id != -1 "> <svg viewBox="0 0 512 512" class="icon"><use xlink:href="#add"></use></svg>{{language.update_model}}
+                                        <button type="button" [disabled]="multiple_model_disabled_status" class="btn with-icon btn-sm btn-info mr-2 add-update-btn update-btn multiple_model_click_btn" (click)="update_added_model()" *ngIf="step2_data.model_code != '' && step2_data.model_code != undefined &&  step2_selected_model_id != -1 "> <svg viewBox="0 0 8500 8500" class="icon"><use xlink:href="#add"></use></svg>{{language.update_model}}
                                         </button>
                                         <button type="button" class="btn btn-sm with-icon btn-danger" title="{{language.remove_this_modal}}" *ngIf="step2_data.model_code != '' && step2_data.model_code != undefined &&  step2_selected_model_id != -1 " (click)="remove_final_modal(step2_selected_model)">
                                             <svg viewBox="0 0 753.23 753.23" class="icon"><use xlink:href="#bin"></use></svg>{{language.delete_model}}

@@ -296,6 +296,7 @@
     "Nodataforsave": "No expression added to save in the system, please add expression before saving.",
     "DateValidation": "From date cannot be greater than to date",
     "clear_selection": "Clear Selection",
+    "clear_filter": "Clear Filter",
     "add_model": "Add Model",
     "update_model": "Update Model",
     "delete_model": "Delete Model",
@@ -548,6 +549,7 @@
     "cannot_submit_empty_resource":"Cannot apply empty resource to a operation",
     "resource_code_cannot_beblack":"Resource code cannot blank at row - ",
     "firstOperationInspectionQC":"First operation cannot be of inspection QC type",
+    "at_row":"at row",
     "lastOperSetup":"Last operation cannot be of Setup type",
     "res_consumption_method":"Res Consumption Method",
     "opn_num_format_blank": "Operation number format cannot be blank",
@@ -609,7 +611,13 @@
     "hidden_item_text_on_report":"Hidden Item Text On Report",
     "DataNotUpdated": "Failed to update data",
     "confirm": "Confirm",
-    "rule_output_title":"Rule Output"
-
+    "rule_output_title":"Rule Output",
+    "duplicate_record":"Duplicate this record",	
+    "no_records_found_in_range":"No records found for the following filter.",	
+    "draft_new":"Draft / New",	
+    "archive_all":"Archive All",	
+    "cnf_archieved_successfully":"Configurations Archieved successfully",	
+    "cnf_deleted_successfully":"Configurations Deleted successfully",	
+    "delete_all":"Delete All"
 
 }
