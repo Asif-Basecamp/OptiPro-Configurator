@@ -101,7 +101,7 @@ export class FeatureBomAddEditComponent implements OnInit {
     this.getFeatureBomDetail(id);
   }
   navigateToMasterHeader(feature_id) {
-    this.route.navigateByUrl('feature-bom/add-edit/' + feature_id)
+    this.route.navigateByUrl('feature/edit/' + feature_id)
   }
 
   ngOnInit() {

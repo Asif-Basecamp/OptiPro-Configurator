@@ -2354,9 +2354,9 @@ open_operation_resources(flag) {
     var type_value = type.trim();
     if (type_value == 'feature') {
       this.tree_data_json = [];
-      this.route.navigateByUrl('feature/model/edit/' + this.routing_header_data.feature_id);
+      this.route.navigateByUrl('feature-bom/add-edit/' + this.routing_header_data.feature_id);
     } else if (type_value == 'model') {
-      this.route.navigateByUrl('feature/model/edit/' + this.routing_header_data.modal_id);
+      this.route.navigateByUrl('model-bom/add-edit/' + this.routing_header_data.modal_id);
     }
   }
 

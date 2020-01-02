@@ -193,9 +193,9 @@ export class LookupComponent implements OnInit {
     //     return;
     //   }
 
-    //   if (this.popup_lookupfor == "warehouse_lookup") {
-    //     this.warehouse_lookup_list();
-    //   }
+      if (this.popup_lookupfor == "warehouse_lookup") {
+        this.warehouse_lookup_list();
+      }
 
     //   if (this.popup_lookupfor == 'operation_lookup') {
     //     this.operation_lookup_list();
@@ -459,6 +459,43 @@ export class LookupComponent implements OnInit {
       }
     }
 
+  }
+  warehouse_lookup_list() {
+
+    this.popup_title = this.language.warehouse;
+    this.LookupDataLoaded = false;
+    this.showLoader = true;
+    this.fill_input_id = 'warehouseCode';
+    this.table_head = [this.language.code, this.language.Name];
+    this.table_head = [
+    {
+      field: 'WHSECODE',
+      title: this.language.code,
+      type: 'text',
+      width: '100',
+      attrType: 'text'
+    },
+    {
+      field: 'Description',
+      title: this.language.description,
+      type: 'text',
+      width: '100',
+      attrType: 'text'
+    },
+
+    ];
+    this.table_head_hidden_elements = [false, false];
+    this.lookup_key = 'Name';
+    this.width_value = ((100 / this.table_head.length) + '%');
+    this.showLoader = false;
+    this.LookupDataLoaded = true;
+    if (this.serviceData !== undefined) {
+      if (this.serviceData.length > 0) {
+        this.dialogOpened = true;
+        this.loadServerData(this.serviceData);
+        // $("#lookup_modal").modal('show');
+      }
+    }
   }
 
   ruleSelection() {
